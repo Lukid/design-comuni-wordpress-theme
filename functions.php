@@ -165,7 +165,8 @@ function dci_scripts() {
     else {
         wp_enqueue_style( 'dci-boostrap-italia-min', get_template_directory_uri() . '/assets/css/bootstrap-italia.min.css');
     }
-    wp_enqueue_style( 'dci-comuni', get_template_directory_uri() . '/assets/css/comuni.css', array('dci-boostrap-italia-min'));
+    wp_enqueue_style( 'dci-comuni', get_template_directory_uri() . '/assets/css/comuni.css');
+	// wp_enqueue_style( 'dci-comuni', get_template_directory_uri() . '/assets/css/comuni.css', array('dci-boostrap-italia-min'));
 
     wp_enqueue_style( 'dci-font', get_template_directory_uri() . '/assets/css/fonts.css', array('dci-comuni'));
     wp_enqueue_style( 'dci-wp-style', get_template_directory_uri()."/style.css", array('dci-comuni'));
