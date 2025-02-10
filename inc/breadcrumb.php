@@ -366,44 +366,92 @@ class Breadcrumb_Trail {
 					return;
 				}
 
-				if (get_post_type() == 'documento_pubblico') {
-					$this->items[] =  "<a href='".home_url("documento_pubblico")."'>".__("Documenti pubblici", "design_comuni_italia")."</a>";
-					$terms = get_the_terms(get_the_ID(),'tipi_documento');
-					if($terms){
-					  foreach ($terms as $term) {
-						  $this->items[] = sprintf( '<a href="%s">%s</a>', esc_url( get_term_link( $term, 'tipi_documento' ) ), $term->name );
-					  }
-					}
-					$this->items[] = get_the_title();
-					return;
+				// if (get_post_type() == 'documento_pubblico') {
+				// 	$this->items[] =  "<a href='".home_url("documento_pubblico")."'>".__("Documenti pubblici", "design_comuni_italia")."</a>";
+				// 	$terms = get_the_terms(get_the_ID(),'tipi_documento');
+				// 	if($terms){
+				// 	  foreach ($terms as $term) {
+				// 		  $this->items[] = sprintf( '<a href="%s">%s</a>', esc_url( get_term_link( $term, 'tipi_documento' ) ), $term->name );
+				// 	  }
+				// 	}
+				// 	$this->items[] = get_the_title();
+				// 	return;
+				// }
+
+				$group_name = dci_get_group_name(get_post_type());
+				// console_log($group_name);
+				switch ($group_name) {
+					// case 'Vivere il comune' :
+					//     $this->items[] =  "<a href='".home_url("vivere-il-comune")."'>".__("Vivere il Comune", "design_comuni_italia")."</a>";
+					//     $this->items[] = get_the_title();
+					//     return;
+					//     break;
+					case 'Amministrazione':
+						$this->items[] = "<a href='" . home_url("amministrazione") . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
+						$post_type = get_post_type(get_the_ID());
+						if ($post_type == 'unita_organizzativa') {
+							$tipo_uo = get_the_terms(get_the_ID(), 'tipi_unita_organizzativa');
+							if (!empty($tipo_uo[0])) {
+								if ($tipo_uo[0]->slug == 'area') {
+									$this->items[] = "<a href='" . home_url("aree-amministrative") . "'>Aree amministrative</a>";
+								} elseif ($tipo_uo[0]->slug == 'ente') {
+									$this->items[] = "<a href='" . home_url("enti-e-fondazioni") . "'>Enti e Fondazioni</a>";
+								} elseif ($tipo_uo[0]->slug == 'fondazione') {
+									$this->items[] = "<a href='" . home_url("enti-e-fondazioni") . "'>Enti e Fondazioni</a>";
+								} elseif ($tipo_uo[0]->slug == 'ufficio') {
+									$this->items[] = "<a href='" . home_url("uffici") . "'>Uffici</a>";
+								} elseif ($tipo_uo[0]->slug == 'giunta-comunale') {
+									$this->items[] = "<a href='" . home_url("organi-di-governo") . "'>Organi di Governo</a>";
+								} elseif ($tipo_uo[0]->slug == 'consiglio-comunale') {
+									$this->items[] = "<a href='" . home_url("organi-di-governo") . "'>Organi di Governo</a>";
+								} elseif ($tipo_uo[0]->slug == 'commissione') {
+									$this->items[] = "<a href='" . home_url("organi-di-governo") . "'>Organi di Governo</a>";
+								}
+							}
+						} else if ($post_type == 'documento_pubblico') {
+							$this->items[] = "<a href='" . home_url("documenti-e-dati") . "'>Documenti e Dati</a>";
+							$tipo_documento = get_the_terms(get_the_ID(), 'tipi_documento');
+							if (!empty($tipo_documento[0])) {
+								$this->items[] = "<a href='" . home_url("tipi_documento/" . $tipo_documento[0]->slug) . "'>" . $tipo_documento[0]->name . "</a>";
+							}
+						} else if ($post_type == 'persona_pubblica') {
+							$tipo_persona = get_the_terms(get_the_ID(), 'tipi_persona');
+							if (!empty($tipo_persona[0])) {
+								if ($tipo_persona[0]->slug == 'amministrativo') {
+									$this->items[] = "<a href='" . home_url("personale-amministrativo") . "'>Personale amministrativo</a>";
+								} else if ($tipo_persona[0]->slug == 'politico') {
+									$this->items[] = "<a href='" . home_url("politici") . "'>Politici</a>";
+								}
+							}
+						}
+						$this->items[] = get_the_title();
+						return;
+						break;
+					case 'Servizi':
+						$this->items[] = "<a href='" . home_url("servizi") . "'>" . __("Servizi", "design_comuni_italia") . "</a>";
+						$this->items[] = get_the_title();
+						return;
+						break;
+					case 'Novità':
+						$this->items[] = "<a href='" . home_url("novita") . "'>" . __("Novità", "design_comuni_italia") . "</a>";
+						$tipo_notizia = get_the_terms(get_the_ID(), 'tipi_notizia');
+						if (!empty($tipo_notizia[0])) {
+							$tipo_notizia_archive_link = get_home_url() . '/novita/tipologia/' . $tipo_notizia[0]->slug;
+							$tipo_notizia = ucwords($tipo_notizia[0]->name);
+							$this->items[] = "<a href='" . $tipo_notizia_archive_link . "'>" . $tipo_notizia = ucwords($tipo_notizia) . "</a>";
+						}
+						$this->items[] = get_the_title();
+						return;
+						break;
 				}
 
-			    $group_name = dci_get_group_name(get_post_type());
-			    //console_log($group_name);
-			    switch ($group_name) {
-                    case 'Vivere il comune' :
-                        $this->items[] =  "<a href='".home_url("vivere-il-comune")."'>".__("Vivere il Comune", "design_comuni_italia")."</a>";
-                        $this->items[] = get_the_title();
-                        return;
-                        break;
-                    case 'Amministrazione':
-                        $this->items[] =  "<a href='".home_url("amministrazione")."'>".__("Amministrazione", "design_comuni_italia")."</a>";
-                        $this->items[] = get_the_title();
-                        return;
-                        break;
-                    case 'Servizi':
-                        $this->items[] =  "<a href='".home_url("servizi")."'>".__("Servizi", "design_comuni_italia")."</a>";
-                        $this->items[] = get_the_title();
-                        return;
-                        break;
-                    case 'Novità':
-                        $this->items[] =  "<a href='".home_url("novita")."'>".__("Novità", "design_comuni_italia")."</a>";
-                        $this->items[] = get_the_title();
-                        return;
-                        break;
-                }
-
-                $this->add_singular_items();
+				if (get_the_title() == 'Sindaco') {
+					$this->items[] = "<a href='" . home_url("amministrazione") . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
+					$this->items[] = "<a href='" . home_url("organi-di-governo") . "'>Organi di Governo</a>";
+					$this->items[] = get_the_title();
+				} else {
+					$this->add_singular_items();
+				}
                 //console_log( $this->items);
             }
 
@@ -433,9 +481,10 @@ class Breadcrumb_Trail {
                         $this->items[] = single_term_title( '', false );
                     }
                     else if (is_tax(array("tipi_documento"))){
-                        $this->items[] = "<a href='".home_url("documenti-e-dati")."'>".__("Documenti e dati", "design_comuni_italia")."</a>";
+						$this->items[] = "<a href='" . home_url("amministrazione") . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
+                        $this->items[] = "<a href='".home_url("documenti-e-dati")."'>".__("Documenti e Dati", "design_comuni_italia")."</a>";
                         $term_name = single_term_title( '', false );
-                        $this->items[] = __(dci_get_breadcrumb_label($term_name), "design_comuni_italia");
+                        $this->items[] = __($term_name, "design_comuni_italia");
                     }
                     else if (is_tax(array("tipi_notizia"))){
                         $this->items[] = "<a href='".home_url("novita")."'>".__("Novità", "design_comuni_italia")."</a>";

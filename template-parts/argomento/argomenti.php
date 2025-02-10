@@ -8,6 +8,8 @@
     <div class="row g-4">       
         <?php foreach ($arr_ids as $arg_id) { 
             $argomento = get_term_by('term_id', $arg_id, 'argomenti');    
+
+            if ($argomento && $argomento->count > 0) { 
         ?>
         <div class="col-md-6 col-xl-4">
             <div class="cmp-card-simple card-wrapper pb-0 rounded border border-light">
@@ -21,6 +23,8 @@
               </div>
             </div>
           </div>
-        <?php } ?>
+        <?php 
+            }
+        } ?>
     </div>
 </div>

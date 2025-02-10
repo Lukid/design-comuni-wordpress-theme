@@ -1,7 +1,7 @@
 <?php
-global $scheda;
+global $scheda, $count;
 
-$post = get_post($scheda)??null;
+$post = get_post($scheda['scheda_'.$count.'_contenuto'][0]);
 $img = dci_get_meta('immagine');
 $descrizione_breve = dci_get_meta('descrizione_breve');
 $icon = dci_get_post_type_icon_by_id($post->ID);

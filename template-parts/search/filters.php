@@ -23,12 +23,6 @@ if(isset($_GET["post_terms"]))
                 <?php 
                     foreach ($tipologie as $type_slug) {
                         $tipologia = get_term_by('slug', $type_slug);
-
-                        if ( isset( COMUNI_TIPOLOGIE[$type_slug] ) && isset( COMUNI_TIPOLOGIE[$type_slug]['plural_name'] ) ) {
-                            $plural_name = COMUNI_TIPOLOGIE[$type_slug]['plural_name'];
-                        } else if ( post_type_exists( $type_slug ) ) {
-                            $plural_name = get_post_type_object( $type_slug )->labels->name;
-                        }
                 ?>
                 <li>
                     <div class="form-check">
@@ -44,7 +38,7 @@ if(isset($_GET["post_terms"]))
                         <label
                             for="<?php echo $type_slug; ?>" 
                             class="subtitle-small_semi-bold mb-0 category-list__list"
-                            ><?php echo $plural_name; ?> 
+                            ><?php echo COMUNI_TIPOLOGIE[$type_slug]['plural_name']; ?> 
                         </label>
                         </div>
                     </div>

@@ -909,18 +909,26 @@ if (!function_exists("dci_truncate")) {
  * @param  int     $post_id
  * @return array
  */
-if(!function_exists("dci_get_data_pubblicazione_arr")) {
-    function dci_get_data_pubblicazione_arr($key = '', $prefix = '', $post_id = null) {
+if (!function_exists("dci_get_data_pubblicazione_arr")) {
+    function dci_get_data_pubblicazione_arr($key = '', $prefix = '', $post_id = null)
+    {
         global $post;
         $arrdata = array();
-        if (!$post) $post = get_post($post_id);
+        if (!$post)
+            $post = get_post($post_id);
 
-        $data_pubblicazione = dci_get_meta($key, $prefix , $post_id);
-        if (!$data_pubblicazione) {
-            $data_pubblicazione = explode(' ',$post->post_date)[0];
-            $arrdata =  array_reverse(explode("-", $data_pubblicazione));
-        } else {
-            $arrdata =  explode("-", date('d-m-y',$data_pubblicazione));  
+        $data_pubblicazione = dci_get_meta($key, $prefix, $post_id);
+        if ($key == "data_pubblicazione") {
+            if (!$data_pubblicazione) {
+                $data_pubblicazione = explode(' ', $post->post_date)[0];
+                $arrdata = array_reverse(explode("-", $data_pubblicazione));
+            } else {
+                $arrdata = explode("-", date('d-m-y', $data_pubblicazione));
+            }
+        } else if ($key == "data_scadenza") {
+            if ($data_pubblicazione) {
+                $arrdata = explode("-", date('d-m-y', $data_pubblicazione));
+            }
         }
         return $arrdata;
     }

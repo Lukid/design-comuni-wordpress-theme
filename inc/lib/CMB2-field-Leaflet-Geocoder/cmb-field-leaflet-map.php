@@ -21,7 +21,7 @@ class CMB2_Field_Leaflet {
     /**
      * @var string tilelayer
      */
-    const INITIAL_TILELAYER = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
+    const INITIAL_TILELAYER = 'https://{s}.tile.osm.org/{z}/{x}/{y}.png';
 
     /**
      * @var string searchbox position
@@ -83,8 +83,8 @@ class CMB2_Field_Leaflet {
         echo '<div id="geocode-selector"></div>';
         echo "<div class='cmb2-leaflet__container'></div>";
 
-        $this->render_input( 'lat', $field, $field_escaped_value, $field_type_object );
-        $this->render_input( 'lng', $field, $field_escaped_value, $field_type_object );
+        $this->render_input( $field, $field_escaped_value, $field_type_object, 'lat' );
+        $this->render_input( $field, $field_escaped_value, $field_type_object, 'lng' );
 
         $field_type_object->_desc( true, true );
 
@@ -137,7 +137,7 @@ class CMB2_Field_Leaflet {
      *
      * @internal param array $args
      */
-    protected function render_input( $field_name, CMB2_Field $field, $field_escaped_value, CMB2_Types $field_type_object ) {
+    protected function render_input( CMB2_Field $field, $field_escaped_value, CMB2_Types $field_type_object, $field_name = '' ) {
         $attrs = $field_type_object->concat_attrs( [
             'id'    => "{$field->args( 'id' )}_{$field_name}",
             'type'  => 'hidden',

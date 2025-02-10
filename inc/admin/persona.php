@@ -172,13 +172,13 @@ function dci_add_persone_metaboxes() {
         ),
     ) );
 
-	$cmb_user->add_field( array(
-        'id' => $prefix . 'responsabile_di',
-        'name'    => __( 'Responsabile di', 'design_comuni_italia' ),
-        'desc' => __( 'Organizzazione di cui è responsabile.' , 'design_comuni_italia' ),
-        'type'    => 'pw_select',
-        'options' => dci_get_posts_options('unita_organizzativa'),
-    ) );
+	// $cmb_user->add_field( array(
+    //     'id' => $prefix . 'responsabile_di',
+    //     'name'    => __( 'Responsabile di', 'design_comuni_italia' ),
+    //     'desc' => __( 'Organizzazione di cui è responsabile.' , 'design_comuni_italia' ),
+    //     'type'    => 'pw_select',
+    //     'options' => dci_get_posts_options('unita_organizzativa'),
+    // ) );
 
 	$cmb_user->add_field( array(
         'id' => $prefix . 'data_conclusione_incarico',

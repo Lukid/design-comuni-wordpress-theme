@@ -12,6 +12,7 @@
                 </div>
                 <div class="card-body">
                     <fieldset class="rating">
+                        <legend class="visually-hidden">Valuta la chiarezza delle informazioni</legend>
                         <?php
                             $c = 5;
                             while ($c > 0) { ?>

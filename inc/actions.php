@@ -55,7 +55,6 @@ function force_post_title( $post )  {
                         '_dci_servizio_come_fare',
                         '_dci_servizio_cosa_serve_introduzione',
                         '_dci_servizio_output',
-                        '_dci_servizio_procedure_collegate',
                         '_dci_servizio_tempi_text',
                     ]
                     for (const field_id of required_dci_cmb2_wysiwyg_fields) {
@@ -174,8 +173,8 @@ function dci_search_filters( $query ) {
             $query->set( 'post_type', $post_types );
         }
         // Ricerca in ordine alfabetico
-        $query->set( 'orderby', 'post_title' );
-        $query->set( 'order', 'ASC' );
+        // $query->set( 'orderby', 'post_title' );
+        // $query->set( 'order', 'ASC' );
 
         // Seleziono solo i tipi ricercabili
         $query->set( 'post_type', dci_get_sercheable_tipologie() );

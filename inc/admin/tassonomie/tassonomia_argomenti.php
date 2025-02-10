@@ -78,7 +78,7 @@ function dci_register_taxonomy_metabox() {
         'name'    => __( 'Assessorato di riferimento' , 'design_comuni_italia' ),
         'desc' => __( 'Assessorati che hanno deleghe su questo argomento' , 'design_comuni_italia' ),
         'type'    => 'pw_multiselect',
-        'options' => dci_get_posts_options('unita_organizzativa'),
+        'options' => dci_get_posts_options('persona_pubblica'),
     ) );
 
 }

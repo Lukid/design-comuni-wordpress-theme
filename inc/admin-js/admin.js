@@ -144,6 +144,7 @@ function loadSvg(){
         'it-telegram',
         'it-twitter',
         'it-twitter-square',
+        'it-twitter-x',
         'it-whatsapp',
         'it-whatsapp-square',
         'it-youtube',

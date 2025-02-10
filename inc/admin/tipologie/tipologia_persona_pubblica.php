@@ -116,16 +116,16 @@ function dci_add_persona_pubblica_metaboxes() {
         )
     ) );
 
-    $cmb_user->add_field( array(
-        'id' => $prefix . 'responsabile_di',
-        'name'    => __( 'Responsabile di', 'design_comuni_italia' ),
-        'desc' => __( 'Organizzazione di cui è responsabile.' , 'design_comuni_italia' ),
-        'type'    => 'pw_select',
-        'options' => dci_get_posts_options('unita_organizzativa'),
-        'attributes' => array(
-            'placeholder' =>  __( 'Seleziona le Unità Organizzative', 'design_comuni_italia' ),
-        )
-    ) );
+    // $cmb_user->add_field( array(
+    //     'id' => $prefix . 'responsabile_di',
+    //     'name'    => __( 'Responsabile di', 'design_comuni_italia' ),
+    //     'desc' => __( 'Organizzazione di cui è responsabile.' , 'design_comuni_italia' ),
+    //     'type'    => 'pw_select',
+    //     'options' => dci_get_posts_options('unita_organizzativa'),
+    //     'attributes' => array(
+    //         'placeholder' =>  __( 'Seleziona le Unità Organizzative', 'design_comuni_italia' ),
+    //     )
+    // ) );
 
     $cmb_user->add_field( array(
         'id' => $prefix . 'data_conclusione_incarico',

@@ -8,31 +8,31 @@ $tipi_luogo = get_the_terms($post->ID,'tipi_luogo');
 ?>
 
 <div class="col-lg-6 col-xl-4">
-    <div class="card-wrapper shadow-sm rounded border border-light">
-        <div class="card no-after rounded">
-            <div class="img-responsive-wrapper">
-                <div class="img-responsive img-responsive-panoramic">
+    <div class="card-wrapper shadow-sm rounded cmp-list-card-img">
+        <div class="card card-img no-after rounded">
+            <div class="img-responsive-wrapper cmp-list-card-img__wrapper">
+                <div class="img-responsive img-responsive-panoramic h-100">
                     <figure class="img-wrapper">
                         <?php dci_get_img($img, 'rounded-top img-fluid'); ?>
                     </figure>
                 </div>
             </div>
             <div class="card-body">
-                <div class="category-top">
+                <div class="category-top cmp-list-card-img__body">
                     <?php 
                         $count = 1;
                         if ( is_array($tipi_luogo) && count($tipi_luogo) ) {
                         foreach ($tipi_luogo as $tipo_luogo) {
                     ?>
                         <?php echo $count == 1 ? '' : ' - '; ?>
-                        <a class="category text-decoration-none"
+                        <a class="text-decoration-none fw-bold cmp-list-card-img__body-heading-title"
                             href="<?php echo get_term_link($tipo_luogo->term_id); ?>"
                         >
                             <?php echo $tipo_luogo->name;?>
                         </a>
                     <?php ++$count; }} ?>
                 </div>
-                <h3 class="card-title">
+                <h3 class="cmp-list-card-img__body-title u-main-primary">
                     <a class="text-decoration-none"
                         href="<?php echo get_permalink($post->ID); ?>"
                         data-element="live-category-link"
@@ -40,10 +40,10 @@ $tipi_luogo = get_the_terms($post->ID,'tipi_luogo');
                         <?php echo $post->post_title ?>
                     </a>
                 </h3>
-                <p class="card-text text-secondary pb-3">
+                <p class="cmp-list-card-img__body-description">
                     <?php echo $descrizione; ?>
                 </p>
-                <a class="read-more t-primary text-uppercase"
+                <a class="read-more t-primary text-uppercase cmp-list-card-img__body-link"
                     href="<?php echo get_permalink($post->ID); ?>"
                     aria-label="Leggi di più sulla pagina di <?php echo $post->post_title ?>"
                 >

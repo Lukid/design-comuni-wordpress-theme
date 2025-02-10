@@ -24,7 +24,7 @@ function dci_register_post_type_notizia() {
         'menu_icon'     => 'dashicons-media-interactive',
         'has_archive'   => false,
         //'rewrite' => array('slug' => 'novita/%tipi_notizia%','with_front' => false),
-        'rewrite' => array('slug' => 'novita','with_front' => false),
+        // 'rewrite' => array('slug' => 'novita','with_front' => false),
         'capability_type' => array('notizia', 'notizie'),
         'map_meta_cap'    => true,
         'description'    => __( "Tipologia che struttura le informazioni relative a agli aggiornamenti d un comune", 'design_comuni_italia' ),

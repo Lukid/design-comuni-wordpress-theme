@@ -127,7 +127,7 @@ function dci_get_pagine_template_names(){
  * @return string[]
  */
 function dci_get_sercheable_tipologie() {
-    $arrayTipologie = array(
+    return array(
         'unita_organizzativa',
         'evento',
         'luogo',
@@ -136,13 +136,8 @@ function dci_get_sercheable_tipologie() {
         'servizio',
         'persona_pubblica',
         'dataset',
-        'page',
-        'post'
+        'progetti'
     );
-    if ( post_type_exists( 'amm-trasparente' ) ) { // Compatibilità plugin amministrazione-trasparente
-        $arrayTipologie[] = 'amm-trasparente';
-    }
-    return $arrayTipologie;
 }
 
 /**

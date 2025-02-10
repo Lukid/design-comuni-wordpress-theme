@@ -10,7 +10,7 @@
 get_header();
 ?>
     <main id="main-container" class="main-container redbrown">
-        <h1 class="visually-hidden">
+        <h1 class="visually-hidden" id="main-container">
             <?php echo dci_get_option("nome_comune"); ?>
         </h1>
         <section id="head-section">
