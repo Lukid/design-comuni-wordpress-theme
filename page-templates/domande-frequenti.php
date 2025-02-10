@@ -67,7 +67,7 @@ get_header();
                                 placeholder="Cerca" 
                                 id="autocomplete-three" 
                                 name="search"
-                                value="<?php echo $query; ?>"
+                                value="<?php echo esc_attr($query); ?>"
                                 data-bs-autocomplete="[]">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit" id="button-3">
@@ -113,6 +113,7 @@ get_header();
         </form>
 
         <?php wp_reset_query(); ?>
+        <?php get_template_part("template-parts/common/valuta-servizio"); ?>
         <?php get_template_part("template-parts/common/assistenza-contatti"); ?>
       </main>
 <?php

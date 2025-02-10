@@ -90,7 +90,7 @@ function dci_add_persona_pubblica_metaboxes() {
     $cmb_user->add_field( array(
         'name'    => __( 'Foto della Persona', 'design_comuni_italia' ),
         'desc'    => __( 'Inserire una fotografia che ritrae il soggetto descritto nella scheda', 'design_comuni_italia' ),
-        'id'      => $prefix . 'foto',
+        'id'      => $prefix . 'immagine',
         'type'    => 'file',
     ) );
 
@@ -116,16 +116,16 @@ function dci_add_persona_pubblica_metaboxes() {
         )
     ) );
 
-    // $cmb_user->add_field( array(
-    //     'id' => $prefix . 'responsabile_di',
-    //     'name'    => __( 'Responsabile di', 'design_comuni_italia' ),
-    //     'desc' => __( 'Organizzazione di cui è responsabile.' , 'design_comuni_italia' ),
-    //     'type'    => 'pw_select',
-    //     'options' => dci_get_posts_options('unita_organizzativa'),
-    //     'attributes' => array(
-    //         'placeholder' =>  __( 'Seleziona le Unità Organizzative', 'design_comuni_italia' ),
-    //     )
-    // ) );
+    $cmb_user->add_field( array(
+        'id' => $prefix . 'responsabile_di',
+        'name'    => __( 'Responsabile di', 'design_comuni_italia' ),
+        'desc' => __( 'Organizzazione di cui è responsabile.' , 'design_comuni_italia' ),
+        'type'    => 'pw_select',
+        'options' => dci_get_posts_options('unita_organizzativa'),
+        'attributes' => array(
+            'placeholder' =>  __( 'Seleziona le Unità Organizzative', 'design_comuni_italia' ),
+        )
+    ) );
 
     $cmb_user->add_field( array(
         'id' => $prefix . 'data_conclusione_incarico',
@@ -290,4 +290,5 @@ function dci_persona_pubblica_set_post_title( $data ) {
 
     return $data;
 }
+
 add_filter( 'wp_insert_post_data' , 'dci_persona_pubblica_set_post_title' , '99', 1 );

@@ -352,6 +352,12 @@ class Breadcrumb_Trail {
                 }
             }
 
+            $custom_breadcrumbs = apply_filters( 'dci_get_breadcrumb_items', false, $this->items );
+            if ( !empty( $custom_breadcrumbs ) ) {
+                $this->items = $custom_breadcrumbs;
+                return;
+            }
+
             if ( is_singular() ) {
 
 				if (get_post_type() == 'servizio') {
@@ -462,7 +468,7 @@ class Breadcrumb_Trail {
 
 			// If viewing an archive page.
 			elseif ( is_archive() ) {
-
+				
                 //if(is_post_type_archive(dci_get_post_types_grouped('vivere-il-comune')))
                     //$this->items[] =  "<a href='".home_url("vivere-il-comune")."'>".__("Vivere il Comune", "design_comuni_italia")."</a>";
 
@@ -471,7 +477,7 @@ class Breadcrumb_Trail {
 
                 }
                 elseif ( is_category() || is_tag() || is_tax() ){
-
+					
                     if (is_tax(array("categorie_servizio"))){
                         $this->items[] = "<a href='".home_url("servizi")."'>".__("Servizi", "design_comuni_italia")."</a>";
                         $this->items[] = single_term_title( '', false );
@@ -828,7 +834,7 @@ class Breadcrumb_Trail {
 			if ( ! empty( $post_type_object->rewrite['slug'] ) )
 				$this->add_path_parents( $post_type_object->rewrite['slug'] );
 		}
-
+		
 		// Add the post type [plural] name to the trail end.
 		if ( is_paged() || is_author() )
 			$this->items[] = sprintf( '<a href="%s">%s</a>', esc_url( get_post_type_archive_link( $post_type_object->name ) ), post_type_archive_title( '', false ) );

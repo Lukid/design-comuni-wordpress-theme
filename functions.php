@@ -158,16 +158,12 @@ function dci_scripts() {
 
     //wp_deregister_script('jquery');
 
-	wp_enqueue_style( 'dci-wp-style', get_template_directory_uri()."/style.css" );
-	wp_enqueue_style( 'dci-font', get_template_directory_uri() . '/assets/css/fonts.css');
-	//load Bootstrap Italia latest css if exists in node_modules
-    if (file_exists(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'node_modules/bootstrap-italia/dist/css/bootstrap-italia-comuni.min.css')) {
-        wp_enqueue_style( 'dci-boostrap-italia-min', get_template_directory_uri() . '/node_modules/bootstrap-italia/dist/css/bootstrap-italia-comuni.min.css');
-    }
-    else {
-        wp_enqueue_style( 'dci-boostrap-italia-min', get_template_directory_uri() . '/assets/css/bootstrap-italia.min.css');
-    }
-	wp_enqueue_style( 'dci-comuni', get_template_directory_uri() . '/assets/css/comuni.css');
+	//load bootstrap-italia-comuni
+    wp_enqueue_style( 'dci-comuni', get_template_directory_uri() . '/assets/css/bootstrap-italia-comuni.min.css');
+
+    wp_enqueue_style( 'dci-font', get_template_directory_uri() . '/assets/css/fonts.css', array('dci-comuni'));
+    wp_enqueue_style( 'dci-wp-style', get_template_directory_uri()."/style.css", array('dci-comuni'));
+
 
 	wp_enqueue_script( 'dci-modernizr', get_template_directory_uri() . '/assets/js/modernizr.custom.js');
 
@@ -255,5 +251,29 @@ function console_log ($output, $msg = "log") {
 };
 
 function get_parent_template () {
-	return end(explode('/', get_page_template_slug(wp_get_post_parent_id(get_the_id()))));
+	return basename( get_page_template_slug( wp_get_post_parent_id() ) );
+}
+
+
+ // Restituisce il formato e le dimensioni di un allegato
+function getFileSizeAndFormat($url) {
+    $percorso = parse_url($url);
+    $percorso = isset($percorso["path"]) ? substr($percorso["path"], 0, -strlen(pathinfo($url, PATHINFO_BASENAME))) : '';
+    $response = wp_remote_head($url);
+
+    if (is_wp_error($response)) {
+        return 'Errore nel recupero delle informazioni del file';
+    }
+
+    $headers = wp_remote_retrieve_headers($response);
+    $content_length = isset($headers['content-length']) ? intval($headers['content-length']) : 0;
+
+    $base = log($content_length, 1024);
+    $suffixes = array('', 'Kb', 'Mb', 'Gb', 'Tb');
+    $size_formatted = round(pow(1024, $base - floor($base)), 2) . ' ' . $suffixes[floor($base)];
+
+    $info_file = pathinfo($url);
+    $file_format = strtoupper(isset($info_file['extension']) ? $info_file['extension'] : '');
+
+    return $file_format . ' ' . $size_formatted;
 }
